@@ -1,0 +1,544 @@
+/* ══════════════════════════════════════════════════════════════
+   ACADEMIC STRUCTURE — 4-Panel Cascade Layout
+   Uses --clr-* variables from index.css global design system
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Page ───────────────────────────────────────────────────── */
+.ac-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.ac-page-header {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.ac-page-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--clr-text);
+    letter-spacing: -0.02em;
+}
+
+/* Breadcrumb strip */
+.ac-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+}
+
+.bc-active {
+    color: var(--clr-primary-h);
+    font-weight: 600;
+}
+
+.bc-dim {
+    color: var(--clr-text-dim);
+}
+
+.bc-sep {
+    color: var(--clr-border);
+    font-weight: 300;
+}
+
+/* ── 4-Column Grid ──────────────────────────────────────────── */
+.ac-grid {
+    display: grid;
+    grid-template-columns: 210px 210px 210px 1fr;
+    gap: 0;
+    align-items: stretch;
+    border: 1px solid var(--clr-border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--clr-surface);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    min-height: 560px;
+}
+
+/* ── Column (narrow panels) ─────────────────────────────────── */
+.ac-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--clr-border);
+    min-width: 0;
+}
+
+.ac-col--wide {
+    border-right: none;
+}
+
+.ac-col--hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border-right: 1px solid var(--clr-border);
+    background: var(--clr-surface);
+}
+
+.ac-col--wide.ac-col--hint {
+    border-right: none;
+}
+
+/* Hint state */
+.ac-hint-icon {
+    font-size: 2rem;
+    opacity: 0.2;
+}
+
+.ac-hint-text {
+    font-size: 0.8rem;
+    color: var(--clr-text-dim);
+    text-align: center;
+    max-width: 120px;
+    line-height: 1.5;
+}
+
+/* ── Column Header ──────────────────────────────────────────── */
+.ac-col-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.85rem;
+    background: var(--clr-surface-2);
+    border-bottom: 1px solid var(--clr-border);
+
+    flex-shrink: 0;
+    gap: 8px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.ac-col-title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--clr-text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.ac-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--clr-primary);
+    background: var(--clr-primary-dim);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    padding: 1px 6px;
+    border-radius: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60px;
+    flex-shrink: 1;
+}
+
+.ac-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text-muted);
+    border-radius: 10px;
+    padding: 0px 6px;
+    flex-shrink: 0;
+}
+
+/* ── Add Button ─────────────────────────────────────────────── */
+.ac-add-btn {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 7px;
+    border: 1px solid var(--clr-primary);
+    background: transparent;
+    color: var(--clr-primary);
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.15s;
+}
+
+.ac-add-btn:hover {
+    background: var(--clr-primary);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.35);
+}
+
+.ac-add-btn-sm {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 5px;
+    border: 1px solid var(--clr-primary);
+    background: transparent;
+    color: var(--clr-primary);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.ac-add-btn-sm:hover {
+    background: var(--clr-primary);
+    color: #fff;
+}
+
+/* ── Add Form (inline) ──────────────────────────────────────── */
+.add-form {
+    display: flex;
+    gap: 4px;
+    padding: 8px 8px 4px;
+    flex-shrink: 0;
+    animation: slideDown 0.15s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.add-form-input {
+    flex: 1;
+    min-width: 0;
+    padding: 5px 9px;
+    background: var(--clr-surface-2);
+    border: 1px solid var(--clr-primary);
+    border-radius: 7px;
+    color: var(--clr-text);
+    font-size: 0.82rem;
+    box-shadow: 0 0 0 2px var(--clr-primary-dim);
+}
+
+.add-form-input:focus {
+    outline: none;
+}
+
+.add-form-save {
+    padding: 5px 10px;
+    background: var(--clr-primary);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.add-form-save:disabled {
+    opacity: 0.5;
+}
+
+.add-form-cancel {
+    padding: 5px 8px;
+    background: transparent;
+    border: 1px solid var(--clr-border);
+    border-radius: 7px;
+    color: var(--clr-text-muted);
+    font-size: 0.78rem;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ── Column Body / List ─────────────────────────────────────── */
+.ac-col-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* ── List Item ──────────────────────────────────────────────── */
+.ac-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 9px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.12s;
+    border: 1px solid transparent;
+    user-select: none;
+    min-width: 0;
+}
+
+.ac-item:hover {
+    background: var(--clr-surface-2);
+    border-color: var(--clr-border);
+}
+
+.ac-item--active {
+    background: var(--clr-primary-dim);
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+.ac-item-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--clr-border);
+    flex-shrink: 0;
+    transition: background 0.12s;
+}
+
+.ac-item--active .ac-item-dot {
+    background: var(--clr-primary);
+}
+
+.ac-item-label {
+    flex: 1;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--clr-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.ac-item--active .ac-item-label {
+    color: var(--clr-primary-h);
+}
+
+.ac-item-arrow {
+    font-size: 0.85rem;
+    color: var(--clr-primary);
+    flex-shrink: 0;
+}
+
+/* ── Delete Button ──────────────────────────────────────────── */
+.del-icon {
+    background: transparent;
+    border: none;
+    color: transparent;
+    font-size: 0.68rem;
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: all 0.12s;
+}
+
+.ac-item:hover .del-icon,
+.ac-chip:hover .del-icon {
+    color: var(--clr-text-dim);
+}
+
+.del-icon:hover {
+    color: var(--clr-danger) !important;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.del-confirm {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.7rem;
+    color: var(--clr-danger);
+    flex-shrink: 0;
+}
+
+.del-yes,
+.del-no {
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: none;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.del-yes {
+    background: var(--clr-danger);
+    color: #fff;
+}
+
+.del-no {
+    background: var(--clr-surface-2);
+    color: var(--clr-text-muted);
+}
+
+/* ── Empty States ───────────────────────────────────────────── */
+.ac-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 2.5rem 1rem;
+    text-align: center;
+}
+
+.ac-empty-icon {
+    font-size: 1.8rem;
+    opacity: 0.2;
+}
+
+.ac-empty-text {
+    font-size: 0.78rem;
+    color: var(--clr-text-dim);
+    line-height: 1.5;
+}
+
+.ac-empty-inline {
+    font-size: 0.75rem;
+    color: var(--clr-text-dim);
+    font-style: italic;
+    padding: 4px 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   YEAR DETAIL PANEL (Wide)
+══════════════════════════════════════════════════════════════ */
+.ac-detail-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ac-section-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.ac-section-row-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ac-section-row-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.ac-section-icon {
+    font-size: 1rem;
+}
+
+.ac-section-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--clr-text);
+}
+
+.ac-section-hint {
+    font-size: 0.73rem;
+    color: var(--clr-text-dim);
+    margin: -2px 0 0;
+}
+
+.ac-divider {
+    border: none;
+    border-top: 1px solid var(--clr-border);
+}
+
+/* ── Chips ──────────────────────────────────────────────────── */
+.ac-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 2px 0;
+}
+
+.ac-chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.12s;
+    position: relative;
+}
+
+.ac-chip--section {
+    padding: 5px 12px;
+    background: var(--clr-primary-dim);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    color: var(--clr-primary-h);
+}
+
+.ac-chip--section:hover {
+    background: rgba(99, 102, 241, 0.2);
+}
+
+.ac-chip--subject {
+    padding: 4px 10px;
+    background: var(--clr-surface-2);
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text);
+    border-radius: 7px;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.ac-chip--subject:hover {
+    border-color: var(--clr-primary);
+}
+
+/* ── Term Block ─────────────────────────────────────────────── */
+.ac-term-block {
+    border: 1px solid var(--clr-border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.ac-term-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 12px;
+    background: rgba(34, 211, 238, 0.05);
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.ac-term-badge {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--clr-accent);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ac-term-badge::before {
+    content: '◈';
+    font-size: 0.6rem;
+    opacity: 0.7;
+}
+
+.ac-term-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ac-chip-row+.ac-chip-row,
+.ac-term-block .ac-chip-row {
+    padding: 8px 10px;
+}

@@ -1,0 +1,236 @@
+/* ─── Student Management Layout ─────────────────────────────────────────── */
+.student-management-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--sp-5);
+    align-items: start;
+}
+
+/* ─── Filter Sidebar ─────────────────────────────────────────────────────── */
+.student-filter-sidebar {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-3) var(--sp-2);
+    position: sticky;
+    top: var(--sp-4);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--clr-border) transparent;
+}
+
+.filter-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-1) var(--sp-2) var(--sp-3);
+}
+
+.filter-sidebar-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--clr-text-muted);
+}
+
+.filter-clear-btn {
+    background: none;
+    border: none;
+    font-size: 0.75rem;
+    color: var(--clr-danger);
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: var(--radius-sm);
+    transition: background var(--t-fast);
+}
+
+.filter-clear-btn:hover {
+    background: color-mix(in srgb, var(--clr-danger) 12%, transparent);
+}
+
+.filter-sidebar-divider {
+    height: 1px;
+    background: var(--clr-border);
+    margin: var(--sp-2) var(--sp-2);
+}
+
+/* ─── Tree Nodes ─────────────────────────────────────────────────────────── */
+.tree-node {
+    width: 100%;
+}
+
+.tree-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 6px var(--sp-2);
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-align: left;
+    color: var(--clr-text);
+    font-size: 0.85rem;
+    transition: background var(--t-fast), color var(--t-fast);
+    gap: var(--sp-2);
+}
+
+.tree-item:hover {
+    background: var(--clr-surface-high);
+}
+
+.tree-item.active {
+    background: color-mix(in srgb, var(--clr-primary) 15%, transparent);
+    color: var(--clr-primary);
+    font-weight: 600;
+}
+
+.tree-item-left {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-width: 0;
+    overflow: hidden;
+}
+
+.tree-chevron {
+    font-size: 1rem;
+    line-height: 1;
+    transition: transform var(--t-fast);
+    color: var(--clr-text-muted);
+    flex-shrink: 0;
+}
+
+.tree-chevron.open {
+    transform: rotate(90deg);
+}
+
+.tree-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--clr-text-muted);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.tree-item.active .tree-dot {
+    background: var(--clr-primary);
+}
+
+.tree-icon {
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.tree-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.83rem;
+}
+
+.tree-count {
+    font-size: 0.72rem;
+    background: var(--clr-surface-high);
+    color: var(--clr-text-muted);
+    border-radius: 999px;
+    padding: 1px 7px;
+    flex-shrink: 0;
+    border: 1px solid var(--clr-border);
+}
+
+.tree-item.active .tree-count {
+    background: color-mix(in srgb, var(--clr-primary) 20%, transparent);
+    color: var(--clr-primary);
+    border-color: var(--clr-primary);
+}
+
+.tree-children {
+    padding-left: var(--sp-4);
+    border-left: 1px solid var(--clr-border);
+    margin-left: var(--sp-3);
+}
+
+/* ─── Content Area ───────────────────────────────────────────────────────── */
+.student-content-area {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    min-width: 0;
+}
+
+/* ─── Toolbar (search + chip) ────────────────────────────────────────────── */
+.student-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+}
+
+.active-filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    background: color-mix(in srgb, var(--clr-primary) 15%, transparent);
+    border: 1px solid var(--clr-primary);
+    color: var(--clr-primary);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    white-space: nowrap;
+    max-width: 360px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.active-filter-chip button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--clr-primary);
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 0 0 0 var(--sp-1);
+    opacity: 0.7;
+    transition: opacity var(--t-fast);
+}
+
+.active-filter-chip button:hover {
+    opacity: 1;
+}
+
+.student-search {
+    flex: 1;
+    min-width: 180px;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    padding: 8px 14px;
+    color: var(--clr-text);
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color var(--t-fast);
+}
+
+.student-search:focus {
+    border-color: var(--clr-primary);
+}
+
+.student-search::placeholder {
+    color: var(--clr-text-muted);
+}
+
+/* ─── Stats Row ──────────────────────────────────────────────────────────── */
+.student-stats-row {
+    display: flex;
+    align-items: center;
+}
+
+.student-count-label {
+    font-size: 0.83rem;
+    color: var(--clr-text-muted);
+}

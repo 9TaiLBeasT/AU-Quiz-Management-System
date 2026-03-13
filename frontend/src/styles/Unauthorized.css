@@ -1,0 +1,48 @@
+.unauthorized-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--clr-bg);
+}
+
+.unauthorized-card {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-xl);
+    padding: var(--sp-12) var(--sp-10);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-4);
+    max-width: 400px;
+    width: 100%;
+}
+
+.unauthorized-icon {
+    font-size: 4rem;
+}
+
+.unauthorized-card h1 {
+    font-size: var(--font-size-2xl);
+}
+
+.unauthorized-card p {
+    color: var(--clr-text-muted);
+}
+
+.unauthorized-card .btn-primary {
+    margin-top: var(--sp-2);
+    padding: var(--sp-3) var(--sp-6);
+    background: var(--clr-primary);
+    color: #fff;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    transition: background var(--t-fast);
+}
+
+.unauthorized-card .btn-primary:hover {
+    background: var(--clr-primary-h);
+}

@@ -1,0 +1,36 @@
+/* Shared page layout and common patterns */
+.page-section {
+    margin-bottom: var(--sp-8);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--sp-4);
+}
+
+.actions-cell {
+    display: flex;
+    gap: var(--sp-2);
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text-muted);
+    padding: var(--sp-1) var(--sp-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    cursor: pointer;
+    transition: all var(--t-fast);
+}
+
+.action-btn:hover {
+    border-color: var(--clr-primary);
+    color: var(--clr-primary-h);
+}
+
+.action-btn.danger:hover {
+    border-color: var(--clr-danger);
+    color: var(--clr-danger);
+}

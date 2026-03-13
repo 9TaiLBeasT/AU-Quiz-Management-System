@@ -1,0 +1,18 @@
+-- ============================================================
+-- ⚠️  DO NOT RUN THIS FILE — CANCELLED
+-- The original schema.sql is correct:
+--   sections.academic_year_id → academic_years.id
+-- This patch was wrong and has been superseded.
+-- ============================================================
+
+-- The correct hierarchy is:
+--   Major → Department → Academic Year → Section (AIML-1A, AIML-1B)
+--                                      → Terms → Subjects
+--
+-- Sections belong to an academic_year (not a department directly),
+-- which means AIML Year 1 has its own sections (AIML-1A, AIML-1B)
+-- and AIML Year 2 has its own sections (AIML-2A, AIML-2B).
+--
+-- The original schema.sql already creates sections with academic_year_id.
+-- Just run schema.sql and nothing else.
+-- ============================================================
