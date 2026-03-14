@@ -29,7 +29,10 @@ ALLOWED_ORIGINS = [
 # Add production origins from environment variable
 env_origins = os.getenv("ALLOWED_ORIGINS")
 if env_origins:
-    ALLOWED_ORIGINS.extend([o.strip() for o in env_origins.split(",")])
+    origins_to_add = [o.strip() for o in env_origins.split(",") if o.strip()]
+    ALLOWED_ORIGINS.extend(origins_to_add)
+
+print(f"INFO: Initialized with ALLOWED_ORIGINS: {ALLOWED_ORIGINS}")
 
 app = FastAPI(
     title="AU Quiz — University Assessment Platform",
@@ -48,34 +51,30 @@ app.add_middleware(
 
 
 # ── Exception handlers — ensure CORS headers on ALL error responses ──
-def _cors_headers(request: Request) -> dict:
-    origin = request.headers.get("origin", "")
-    return {"Access-Control-Allow-Origin": origin} if origin in ALLOWED_ORIGINS else {}
 
 @app.exception_handler(StarletteHTTPException)
 async def cors_http_exception_handler(request: Request, exc: StarletteHTTPException):
-    """Preserves correct HTTP status codes (401, 403, 404 etc.) AND adds CORS headers."""
+    """Returns JSON error but lets middleware handle CORS."""
     return JSONResponse(
         status_code=exc.status_code,
-        content={"detail": exc.detail},
-        headers=_cors_headers(request),
+        content={"detail": exc.detail}
     )
 
 @app.exception_handler(RequestValidationError)
 async def cors_validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(
         status_code=422,
-        content={"detail": str(exc)},
-        headers=_cors_headers(request),
+        content={"detail": str(exc)}
     )
 
 @app.exception_handler(Exception)
 async def cors_server_error_handler(request: Request, exc: Exception):
-    """Catches unexpected errors and returns 500 with CORS headers."""
+    """Catches unexpected errors and returns 500. Middleware handles CORS."""
+    import traceback
+    traceback.print_exc()
     return JSONResponse(
         status_code=500,
-        content={"detail": f"Internal server error: {type(exc).__name__}: {exc}"},
-        headers=_cors_headers(request),
+        content={"detail": f"Internal server error: {type(exc).__name__}: {exc}"}
     )
 
 # ── Routers ────────────────────────────────────────────────────────
