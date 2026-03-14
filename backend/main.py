@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -24,6 +25,11 @@ ALLOWED_ORIGINS = [
     "http://localhost:5175",
     "http://localhost:3000",
 ]
+
+# Add production origins from environment variable
+env_origins = os.getenv("ALLOWED_ORIGINS")
+if env_origins:
+    ALLOWED_ORIGINS.extend([o.strip() for o in env_origins.split(",")])
 
 app = FastAPI(
     title="AU Quiz — University Assessment Platform",
