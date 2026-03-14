@@ -30,7 +30,13 @@ def get_quiz_analytics(quiz_id: str, user=Depends(require_faculty)):
         }
 
     total = len(attempts)
-    pcts = [a["score"] / a["total_questions"] * 100 for a in attempts if a.get("total_questions")]
+    pcts = []
+    for a in attempts:
+        score = a.get("score")
+        q_count = a.get("total_questions")
+        if score is not None and q_count and q_count > 0:
+            pcts.append((score / q_count) * 100)
+
     avg = round(sum(pcts) / len(pcts), 1) if pcts else 0
     highest = round(max(pcts), 1) if pcts else 0
     lowest = round(min(pcts), 1) if pcts else 0

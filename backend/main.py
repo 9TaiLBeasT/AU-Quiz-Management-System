@@ -51,30 +51,36 @@ app.add_middleware(
 
 
 # ── Exception handlers — ensure CORS headers on ALL error responses ──
+def _cors_headers(request: Request) -> dict:
+    origin = request.headers.get("origin", "")
+    return {"Access-Control-Allow-Origin": origin} if origin in ALLOWED_ORIGINS else {}
 
 @app.exception_handler(StarletteHTTPException)
 async def cors_http_exception_handler(request: Request, exc: StarletteHTTPException):
-    """Returns JSON error but lets middleware handle CORS."""
+    """Returns JSON error with CORS headers."""
     return JSONResponse(
         status_code=exc.status_code,
-        content={"detail": exc.detail}
+        content={"detail": exc.detail},
+        headers=_cors_headers(request)
     )
 
 @app.exception_handler(RequestValidationError)
 async def cors_validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(
         status_code=422,
-        content={"detail": str(exc)}
+        content={"detail": str(exc)},
+        headers=_cors_headers(request)
     )
 
 @app.exception_handler(Exception)
 async def cors_server_error_handler(request: Request, exc: Exception):
-    """Catches unexpected errors and returns 500. Middleware handles CORS."""
+    """Catches unexpected errors and returns 500 with CORS headers."""
     import traceback
     traceback.print_exc()
     return JSONResponse(
         status_code=500,
-        content={"detail": f"Internal server error: {type(exc).__name__}: {exc}"}
+        content={"detail": f"Internal server error: {type(exc).__name__}: {exc}"},
+        headers=_cors_headers(request)
     )
 
 # ── Routers ────────────────────────────────────────────────────────

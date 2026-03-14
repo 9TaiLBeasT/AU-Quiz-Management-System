@@ -125,6 +125,7 @@ def delete_quiz(quiz_id: str, user=Depends(require_faculty)):
     quiz = client.table("quizzes").select("id, faculty_id").eq("id", quiz_id).eq("faculty_id", user["id"]).maybe_single().execute()
     if not quiz.data:
         raise HTTPException(404, "Quiz not found or access denied")
+    client.table("quiz_attempts").delete().eq("quiz_id", quiz_id).execute()
     client.table("quiz_questions").delete().eq("quiz_id", quiz_id).execute()
     client.table("quizzes").delete().eq("id", quiz_id).execute()
 
@@ -143,7 +144,7 @@ def publish_quiz(quiz_id: str, user=Depends(require_faculty)):
         raise HTTPException(400, "Quiz must have at least one question before publishing")
 
     result = client.table("quizzes").update({"status": "published"}).eq("id", quiz_id).execute()
-    return result.data[0]
+    return result.data[0] if result.data else {"id": quiz_id, "status": "published"}
 
 
 # ─────────────────────────────────────────────────
@@ -155,7 +156,7 @@ def unpublish_quiz(quiz_id: str, user=Depends(require_faculty)):
         raise HTTPException(404, "Quiz not found or access denied")
 
     result = client.table("quizzes").update({"status": "draft"}).eq("id", quiz_id).execute()
-    return result.data[0]
+    return result.data[0] if result.data else {"id": quiz_id, "status": "draft"}
 
 
 # ─────────────────────────────────────────────────
@@ -168,7 +169,7 @@ def publish_results(quiz_id: str, user=Depends(require_faculty)):
 
     new_state = not quiz.data.get("results_published", False)
     result = client.table("quizzes").update({"results_published": new_state}).eq("id", quiz_id).execute()
-    return result.data[0]
+    return result.data[0] if result.data else {"id": quiz_id, "results_published": new_state}
 
 # ─────────────────────────────────────────────────
 @router.get("/quizzes/{quiz_id}/submissions")
@@ -189,6 +190,11 @@ def get_submissions(quiz_id: str, user=Depends(require_faculty)):
 
     for a in attempts:
         a["student_name"] = profiles.get(a["student_id"], "—")
-        a["percentage"] = round(a["score"] / a["total_questions"] * 100, 1) if a.get("total_questions") else 0
+        score = a.get("score")
+        total = a.get("total_questions")
+        if score is not None and total and total > 0:
+            a["percentage"] = round(score / total * 100, 1)
+        else:
+            a["percentage"] = 0
 
     return attempts
