@@ -8,7 +8,7 @@ import httpx
 logger = logging.getLogger(__name__)
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-OPENROUTER_MODEL = "google/gemma-2-9b-it:free"
+OPENROUTER_MODEL = "google/gemma-3n-e4b-it"
 
 
 _QUESTION_SCHEMA = """

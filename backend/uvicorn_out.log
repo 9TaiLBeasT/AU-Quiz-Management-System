@@ -1,0 +1,14 @@
+INFO:     127.0.0.1:51862 - "GET /admin/users?role=faculty HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61991 - "GET /admin/faculty-assignments HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:64085 - "GET /auth/profile/51894b10-6233-46b5-b465-4dfc649889e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54050 - "OPTIONS /auth/profile/5828c736-b021-4d78-942c-7a599d614f6c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54050 - "GET /auth/profile/5828c736-b021-4d78-942c-7a599d614f6c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52777 - "OPTIONS /admin/users?role=faculty HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52777 - "OPTIONS /admin/faculty-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52777 - "OPTIONS /admin/users?role=faculty HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52777 - "OPTIONS /admin/faculty-assignments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54050 - "GET /auth/profile/5828c736-b021-4d78-942c-7a599d614f6c HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:52777 - "GET /admin/users?role=faculty HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:57008 - "GET /admin/faculty-assignments HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:61028 - "GET /admin/users?role=faculty HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:54274 - "GET /admin/faculty-assignments HTTP/1.1" 200 OK
