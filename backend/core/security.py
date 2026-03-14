@@ -15,7 +15,7 @@ _admin_client = None
 def _get_admin_client():
     global _admin_client
     if _admin_client is None:
-        _admin_client = create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_KEY)
+        _admin_client = create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_ROLE_KEY)
     return _admin_client
 
 
