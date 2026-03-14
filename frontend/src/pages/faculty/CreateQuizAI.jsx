@@ -33,7 +33,7 @@ export default function CreateQuizAI() {
                 prompt: config.prompt
             })
             setGeneratedQuestions(res.data.questions)
-        } catch (e) { alert(e.response?.data?.detail || 'AI generation failed. Make sure Ollama is running.') }
+        } catch (e) { alert(e.response?.data?.detail || 'AI generation failed. Please try again later.') }
         finally { setGenerating(false) }
     }
 
@@ -128,7 +128,7 @@ export default function CreateQuizAI() {
                         <div>
                             <p style={{ margin: 0, fontWeight: 500 }}>AI is thinking…</p>
                             <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--clr-text-muted)' }}>
-                                lfm2.5-thinking is reasoning through your request. This may take 30–60 seconds.
+                                The Gemma-3 model (E4B) is reasoning through your request. This may take 30–60 seconds.
                             </p>
                         </div>
                     </div>

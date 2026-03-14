@@ -20,18 +20,38 @@ export default function QuizManagement() {
     }, [])
 
     const handlePublish = async (id) => {
-        await apiClient.patch(`/faculty/quizzes/${id}/publish`); setQuizzes(p => p.map(q => q.id === id ? { ...q, status: 'published' } : q))
+        try {
+            await apiClient.patch(`/faculty/quizzes/${id}/publish`)
+            setQuizzes(p => p.map(q => q.id === id ? { ...q, status: 'published' } : q))
+        } catch (err) {
+            alert('Failed to publish quiz: ' + (err.response?.data?.detail || err.message))
+        }
     }
     const handleUnpublish = async (id) => {
         if (!confirm('Unpublishing will hide this quiz from students. Continue?')) return
-        await apiClient.patch(`/faculty/quizzes/${id}/unpublish`); setQuizzes(p => p.map(q => q.id === id ? { ...q, status: 'draft' } : q))
+        try {
+            await apiClient.patch(`/faculty/quizzes/${id}/unpublish`)
+            setQuizzes(p => p.map(q => q.id === id ? { ...q, status: 'draft' } : q))
+        } catch (err) {
+            alert('Failed to unpublish quiz: ' + (err.response?.data?.detail || err.message))
+        }
     }
     const toggleResults = async (id, currentState) => {
-        await apiClient.patch(`/faculty/quizzes/${id}/publish-results`); setQuizzes(p => p.map(q => q.id === id ? { ...q, results_published: !currentState } : q))
+        try {
+            await apiClient.patch(`/faculty/quizzes/${id}/publish-results`)
+            setQuizzes(p => p.map(q => q.id === id ? { ...q, results_published: !currentState } : q))
+        } catch (err) {
+            alert('Failed to toggle results: ' + (err.response?.data?.detail || err.message))
+        }
     }
     const handleDelete = async (id) => {
         if (!confirm('Delete this quiz?')) return
-        await apiClient.delete(`/faculty/quizzes/${id}`); setQuizzes(p => p.filter(q => q.id !== id))
+        try {
+            await apiClient.delete(`/faculty/quizzes/${id}`)
+            setQuizzes(p => p.filter(q => q.id !== id))
+        } catch (err) {
+            alert('Failed to delete quiz: ' + (err.response?.data?.detail || err.message))
+        }
     }
 
     const statusVariant = { draft: 'default', published: 'success', closed: 'warning' }
